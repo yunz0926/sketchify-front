@@ -21,4 +21,5 @@ const Wrapper = styled.div`
   color: ${color.font};
   font-size: 16px;
   font-weight: 600;
+  cursor: pointer;
 `;

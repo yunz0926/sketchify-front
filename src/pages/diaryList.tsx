@@ -42,4 +42,5 @@ export default DiaryList;
 const ListWrapper = styled(Flex)`
   position: relative;
   flex-wrap: wrap;
+  width: 330px;
 `;
