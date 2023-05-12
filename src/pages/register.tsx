@@ -1,22 +1,31 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import lockedDiary from "../assets/locked_diary.svg";
 import { Flex, Space } from "../components/common";
-import AuthButton from "../components/AuthButton";
 import AccountInput from "../components/account/AccountInput";
 import Button from "../components/Button";
+import service from "../services";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const { auth } = service;
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
+  const register = () => {
+    if (password !== passwordConfirm) {
+      console.error("비밀번호가 다릅니다.");
+      return;
+    }
+    auth.signUp({ user_name: id, user_password: password });
+    navigate("/");
+  };
+
   return (
     <Background>
       <Flex d="column" style={{ padding: "10px 30px" }}>
-        <Flex j="flex-end">
-          <AuthButton />
-        </Flex>
         <Flex a="center" d="column">
           <Space h="190px" />
           <AccountInput field="아이디" input={id} setInput={setId} />
@@ -35,7 +44,7 @@ const Register = () => {
           <Space h="50px" />
           <Button
             style={{ width: 100, fontSize: 18, borderRadius: 15 }}
-            onClick={() => {}}
+            onClick={register}
           >
             회원가입
           </Button>
