@@ -5,6 +5,7 @@ const color = {
   base4: "#675D50",
   font: "#FFFFFF",
   dash: "#CDCDCD",
+  gray: "#e3e3e3",
 };
 
 export default color;
