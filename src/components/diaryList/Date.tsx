@@ -2,7 +2,6 @@ import { useState } from "react";
 import styled from "styled-components";
 import color from "../../styles/color";
 import { Flex } from "../common";
-import edit from "../../assets/edit.svg";
 import DateSelector from "./DateSelector";
 import DropDown from "./Dropdown";
 
@@ -24,7 +23,7 @@ const Date = () => {
   };
 
   return (
-    <Flex j="space-between" style={{ position: "relative" }}>
+    <>
       <Flex>
         <DateSelector onClick={() => setYearDropdownOpen(!yearDropdownOpen)}>
           {year}
@@ -35,7 +34,6 @@ const Date = () => {
         </DateSelector>
         <Text>월의 일기</Text>
       </Flex>
-      <img alt="edit" src={edit} style={{ paddingRight: 10 }} />
       {yearDropdownOpen && (
         <DropDown values={years} onValueClick={onYearDropdownClick} />
       )}
@@ -46,7 +44,7 @@ const Date = () => {
           onValueClick={onMonthDropdownClick}
         />
       )}
-    </Flex>
+    </>
   );
 };
 

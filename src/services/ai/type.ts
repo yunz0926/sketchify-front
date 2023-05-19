@@ -1,5 +1,5 @@
 export type ChatRequestT = {
-  username: string;
+  user_name: string;
   messages: MessageT[];
 };
 
@@ -17,7 +17,7 @@ export type GenerateImgResponseT = {
 
 export type SpeechToTextResponseT = MessageT[];
 
-type MessageT = {
+export type MessageT = {
   role: RoleT;
   content: string;
 };

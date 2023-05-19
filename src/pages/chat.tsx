@@ -7,8 +7,8 @@ import AudioRecord from "../components/chat/AudioRecord";
 
 const Chat = () => {
   return (
-    <Background d="column" style={{ padding: "10px 30px" }}>
-      <Flex j="flex-end">
+    <Background d="column" style={{ padding: "10px 0px" }}>
+      <Flex j="flex-end" style={{ paddingRight: "30px" }}>
         <AuthButton />
       </Flex>
       <Space h="30px" />
