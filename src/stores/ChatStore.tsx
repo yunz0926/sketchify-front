@@ -7,6 +7,7 @@ type State = {
   imgs: string[];
   koreanDiary: string;
   englishDiary: string;
+  initChat: (chat: MessageT) => void;
   updateChat: (chats: MessageT) => void;
   setImgs: (imgs: string[]) => void;
   setKoreanDiary: (koreaDiary: string) => void;
@@ -15,16 +16,16 @@ type State = {
 
 const useChatStore = create(
   devtools<State>((set) => ({
-    chats: [
-      {
-        role: "system",
-        content:
-          "안녕하세요, 윤지님. 일기 작성을 도와드리겠습니다. 어떤 일이 있으셨나요? 이야기를 들려주세요.",
-      },
-    ],
+    chats: [],
     imgs: [],
     koreanDiary: "",
     englishDiary: "",
+    initChat: (chat: MessageT) => {
+      set((state: State) => ({
+        ...state,
+        chats: [chat],
+      }));
+    },
     updateChat: (chat: MessageT) => {
       set((state: State) => ({
         ...state,

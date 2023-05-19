@@ -6,13 +6,22 @@ import useChatStore from "../../stores/ChatStore";
 
 const Chattings = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const { chats } = useChatStore();
+  const { chats, initChat } = useChatStore();
 
   useEffect(() => {
     if (wrapperRef.current) {
       wrapperRef.current.scrollTop = wrapperRef.current.scrollHeight;
     }
   }, [chats]);
+
+  useEffect(() => {
+    initChat({
+      role: "system",
+      content: `안녕하세요, ${localStorage.getItem(
+        "userName"
+      )}님. 일기 작성을 도와드리겠습니다. 어떤 일이 있으셨나요? 이야기를 들려주세요.`,
+    });
+  }, []);
 
   return (
     <Wrapper ref={wrapperRef}>

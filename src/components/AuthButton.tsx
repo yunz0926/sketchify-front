@@ -20,6 +20,7 @@ const AuthButton = () => {
 
   const onClickLogout = () => {
     localStorage.removeItem("accessToken");
+    localStorage.removeItem("userName");
     navigate("/");
   };
 

@@ -64,7 +64,7 @@ const AudioRecord = () => {
     console.log("messages", messages);
 
     const res = await ai.chatGPT({
-      user_name: "윤지",
+      user_name: localStorage.getItem("userName") || "",
       messages: messages,
     });
 

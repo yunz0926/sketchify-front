@@ -19,9 +19,10 @@ const Login = () => {
 
     if (res.status !== 200) return;
 
-    const { accessToken } = res.data;
+    const { accessToken, userName } = res.data;
 
     localStorage.setItem("accessToken", accessToken);
+    localStorage.setItem("userName", userName);
 
     navigate("/");
   };
