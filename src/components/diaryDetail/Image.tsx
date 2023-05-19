@@ -1,12 +1,15 @@
 import styled from "styled-components";
 import color from "../../styles/color";
-import mock from "../../assets/mock.svg";
 import { Flex } from "../common";
 
-const Image = () => {
+interface Props {
+  url?: string;
+}
+
+const Image = ({ url }: Props) => {
   return (
     <Wrapper j="center">
-      <img alt="mock" src={mock} width={359} />
+      <img alt="diary-img" src={url} width={359} />
     </Wrapper>
   );
 };

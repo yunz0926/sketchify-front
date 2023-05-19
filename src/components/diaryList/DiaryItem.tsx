@@ -1,29 +1,27 @@
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import color from "../../styles/color";
-import mock from "../../assets/mock.svg";
 import { Flex } from "../common";
+import { DiaryT } from "../../stores/DiaryStore";
+import { HTMLProps } from "react";
 
-interface Props {
-  date: string;
+interface Props extends HTMLProps<HTMLDivElement> {
+  item: DiaryT;
   idx: number;
 }
 
-const DiaryItem = ({ date, idx }: Props) => {
-  const navigate = useNavigate();
+const DiaryItem = ({ item, idx, onClick }: Props) => {
   const isLeft = idx % 2 === 0;
   const isTop = idx === 0 || idx === 1;
 
-  const onClick = () => {
-    navigate("/diary-detail");
-  };
+  const offset = 1000 * 60 * 60 * 9;
+  const date = new Date(new Date(item.created_at).getTime() + offset);
 
   return (
     <Wrapper isLeft={isLeft} isTop={isTop} onClick={onClick}>
-      <Item>
-        <Date j="center" a="center">
-          {date}
-        </Date>
+      <Item img_url={item.diary_img}>
+        <DateText j="center" a="center">
+          {date.getUTCMonth() + 1} / {date.getUTCDate()}
+        </DateText>
       </Item>
     </Wrapper>
   );
@@ -41,7 +39,7 @@ const Wrapper = styled.div<{ isLeft: boolean; isTop: boolean }>`
   padding-bottom: 20px;
 `;
 
-const Date = styled(Flex)`
+const DateText = styled(Flex)`
   width: 44px;
   height: 20px;
   color: ${color.font};
@@ -50,10 +48,10 @@ const Date = styled(Flex)`
   background-color: ${color.base1};
 `;
 
-const Item = styled.div`
+const Item = styled.div<{ img_url: String }>`
   width: 134px;
   height: 134px;
-  background-image: url(${mock});
+  ${({ img_url }) => `background-image: url(${img_url});`}
   background-size: cover;
   background-position: center;
 `;

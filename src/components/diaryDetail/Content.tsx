@@ -2,11 +2,14 @@ import styled from "styled-components";
 import color from "../../styles/color";
 import { Flex } from "../common";
 
-const Content = () => {
-  const content = "오늘은 넷플릭스를 보며 힐링의 하루를 보냈다.";
+interface Props {
+  content: string;
+}
+
+const Content = ({ content }: Props) => {
   const splitedContent = content
     .split("")
-    .concat(Array(70 - content.length).fill(" "));
+    .concat(Array(100 - content.length).fill(" "));
 
   return (
     <Wrapper>
@@ -23,7 +26,7 @@ export default Content;
 
 const Wrapper = styled(Flex)`
   width: 360px;
-  height: 252px;
+  //height: 252px;
   border-left: 1px solid ${color.base4};
   border-top: 1px solid ${color.base4};
   flex-wrap: wrap;

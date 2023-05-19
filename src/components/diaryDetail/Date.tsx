@@ -2,10 +2,22 @@ import styled from "styled-components";
 import color from "../../styles/color";
 import { Flex } from "../common";
 
-const Date = () => {
+interface Props {
+  d: Date;
+}
+
+const Date = ({ d }: Props) => {
+  const dayArr = ["일", "월", "화", "수", "목", "금", "토"];
+  const year = d.getUTCFullYear();
+  const month = d.getUTCMonth() + 1;
+  const date = d.getUTCDate();
+  const day = dayArr[d.getUTCDay()];
+
   return (
     <Wrapper a="center">
-      <Text>2023년 3월 5일 일요일</Text>
+      <Text>
+        {year}년 {month}월 {date}일 {day}요일
+      </Text>
     </Wrapper>
   );
 };
