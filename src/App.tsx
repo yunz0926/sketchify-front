@@ -5,6 +5,7 @@ import Register from "./pages/register";
 import DiaryList from "./pages/diaryList";
 import DiaryDetail from "./pages/diaryDetail";
 import Chat from "./pages/chat";
+import Image from "./pages/image";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/chat" element={<Chat />} />
         <Route path="/diary" element={<DiaryList />} />
         <Route path="/diary-detail" element={<DiaryDetail />} />
+        <Route path="/img" element={<Image />} />
       </Routes>
     </BrowserRouter>
   );
