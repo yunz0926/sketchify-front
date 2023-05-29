@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import color from "../styles/color";
 import edit from "../assets/edit.svg";
 import { Flex, Space } from "../components/common";
 import AuthButton from "../components/AuthButton";
@@ -59,7 +60,13 @@ const DiaryList = () => {
           );
         })}
         {diaries.length % 2 === 1 && (
-          <div style={{ width: 154, height: 134 }}></div>
+          <div
+            style={{
+              width: 154,
+              height: 134,
+              borderTop: diaries.length === 1 ? "" : `1px dashed ${color.dash}`,
+            }}
+          ></div>
         )}
       </ListWrapper>
     </Flex>

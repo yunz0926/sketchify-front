@@ -21,20 +21,17 @@ const AudioRecord = () => {
   const [turn, setTurn] = useState(1);
 
   const generateImage = async () => {
-    const str = `한국어로 작성한 일기:
+    const generatedDiary = chats[chats.length - 1].content;
 
-    <오늘은 오랜만에 친구들과 놀아서 정말 기분이 좋았어. 카페에서 맛있는 커피도 마시고, 영화도 보고 왔는데 정말 즐거웠다. 다음에 또 같이 놀자는 약속도 잡았으니 더 기대가 된다.>
-    
-    영어로 작성한 일기:
-    
-    <Today, I had a great time with my friends, which I haven't seen for a while. We went to a cafe and had some nice coffee, then we watched a movie in the theater. It was really enjoyable, and I feel so good right now. We also made a promise to hang out again, which makes me even more excited.>`;
-    const arr = str.split(/<|>/);
+    const arr = generatedDiary.split(/<|>/);
+    console.log("arr", arr);
     setKoreanDiary(arr[1]);
     setEnglishDiary(arr[3]);
 
     const res = await ai.generateImage({ messages: arr[3] });
 
     setImgs([res.image0, res.image1, res.image2]);
+    console.log(res);
     navigate("/img");
   };
 
