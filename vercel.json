@@ -1,8 +1,8 @@
 {
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "http://13.209.7.147:3000/api"
+      "source": "/api/(.*)",
+      "destination": "http://13.209.7.147:3000/api/$1"
     }
   ]
 }
