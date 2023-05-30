@@ -3,6 +3,10 @@
     {
       "source": "/api/(.*)",
       "destination": "http://13.209.7.147:3000/api/$1"
+    },
+    {
+      "source": "/ai/(.*)",
+      "destination": "http://eunki.pythonanywhere.com/$1"
     }
   ]
 }
