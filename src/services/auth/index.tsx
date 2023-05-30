@@ -5,7 +5,7 @@ import axios from "axios";
 const authService = {
   async signUp(req: AuthRequestT) {
     try {
-      const res = await axios.post("/user/signup", req);
+      const res = await axios.post("/api/user/signup", req);
       return res.data;
     } catch (e) {
       console.error(e);
@@ -14,7 +14,7 @@ const authService = {
   },
   async signIn(req: AuthRequestT) {
     try {
-      const res = await axios.post("/user/signin", req);
+      const res = await axios.post("/api/user/signin", req);
       return res.data;
     } catch (e) {
       console.error(e);
@@ -23,7 +23,7 @@ const authService = {
   },
   async checkDuplicate(userName: string) {
     try {
-      const res = await axios.post("/user/duplicated", {
+      const res = await axios.post("/api/user/duplicated", {
         user_name: userName,
       });
       return res.data;

@@ -8,7 +8,7 @@ const diarySerivce = {
     try {
       const accessToken = localStorage.getItem("accessToken");
       console.log("accessToekn", accessToken);
-      const res = await axios.post("/diary/create", req, {
+      const res = await axios.post("/api/diary/create", req, {
         headers: { Authorization: `Bearer ${accessToken}` },
       });
       return res;
@@ -20,7 +20,7 @@ const diarySerivce = {
   getDiaries: async () => {
     try {
       const accessToken = localStorage.getItem("accessToken");
-      const res = await axios.get("/user/diary", {
+      const res = await axios.get("/api/user/diary", {
         headers: { Authorization: `Bearer ${accessToken}` },
       });
       return res.data.data;
