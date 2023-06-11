@@ -25,8 +25,8 @@ const AudioRecord = () => {
 
     const arr = generatedDiary.split(/<|>/);
     console.log("arr", arr);
-    setKoreanDiary(arr[1]);
-    setEnglishDiary(arr[3]);
+    setKoreanDiary(arr[2]);
+    setEnglishDiary(arr[4]);
 
     const res = await ai.generateImage({ messages: arr[3] });
 
