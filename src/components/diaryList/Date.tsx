@@ -10,7 +10,7 @@ const Date = () => {
   const [monthDropdownOpen, setMonthDropdownOpen] = useState(false);
 
   const [year, setYear] = useState(2023);
-  const [month, setMonth] = useState(3);
+  const [month, setMonth] = useState(6);
 
   const onYearDropdownClick = (value: number) => {
     setYear(value);

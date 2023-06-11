@@ -28,7 +28,7 @@ const AudioRecord = () => {
     setKoreanDiary(arr[2]);
     setEnglishDiary(arr[4]);
 
-    const res = await ai.generateImage({ messages: arr[3] });
+    const res = await ai.generateImage({ messages: arr[4] });
 
     setImgs([res.image0, res.image1, res.image2]);
     console.log(res);
