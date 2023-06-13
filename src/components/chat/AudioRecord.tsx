@@ -11,6 +11,7 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 import { MessageT } from "../../services/ai/type";
 import useChatStore from "../../stores/ChatStore";
+import Spinner from "./Spinner";
 
 const AudioRecord = () => {
   const { ai } = service;
@@ -19,6 +20,7 @@ const AudioRecord = () => {
   const { chats, updateChat, setKoreanDiary, setEnglishDiary, setImgs } =
     useChatStore();
   const [turn, setTurn] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   const generateImage = async () => {
     const generatedDiary = chats[chats.length - 1].content;
@@ -53,6 +55,7 @@ const AudioRecord = () => {
 
   const stopRecording = async () => {
     setIsRecording(false);
+    setLoading(true);
     SpeechRecognition.stopListening();
     console.log("trascript", transcript);
 
@@ -64,6 +67,8 @@ const AudioRecord = () => {
       user_name: localStorage.getItem("userName") || "",
       messages: messages,
     });
+
+    setLoading(false);
 
     if (turn === 3) {
       console.log("res", res[0]);
@@ -77,19 +82,22 @@ const AudioRecord = () => {
   };
 
   return (
-    <Flex g="20px" j="center">
-      <Button
-        j="center"
-        a="center"
-        isRecording={listening}
-        onClick={isRecording ? stopRecording : startRecording}
-      >
-        <img alt="mic" src={mic} />
-      </Button>
-      <Button j="center" a="center" onClick={generateImage}>
-        <img alt="submit" src={done} />
-      </Button>
-    </Flex>
+    <>
+      <Flex g="20px" j="center">
+        <Button
+          j="center"
+          a="center"
+          isRecording={listening}
+          onClick={isRecording ? stopRecording : startRecording}
+        >
+          <img alt="mic" src={mic} />
+        </Button>
+        <Button j="center" a="center" onClick={generateImage}>
+          <img alt="submit" src={done} />
+        </Button>
+      </Flex>
+      {loading && <Spinner />}
+    </>
   );
 };
 
