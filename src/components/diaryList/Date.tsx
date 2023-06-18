@@ -4,16 +4,16 @@ import color from "../../styles/color";
 import { Flex } from "../common";
 import DateSelector from "./DateSelector";
 import DropDown from "./Dropdown";
+import useDiaryStore from "../../stores/DiaryStore";
 
 const Date = () => {
   const [yearDropdownOpen, setYearDropdownOpen] = useState(false);
   const [monthDropdownOpen, setMonthDropdownOpen] = useState(false);
 
-  const [year, setYear] = useState(2023);
-  const [month, setMonth] = useState(6);
+  const { year, month, setMonth } = useDiaryStore();
 
   const onYearDropdownClick = (value: number) => {
-    setYear(value);
+    //setYear(value);
     setYearDropdownOpen(false);
   };
 

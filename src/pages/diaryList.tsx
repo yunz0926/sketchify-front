@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import color from "../styles/color";
@@ -5,7 +6,7 @@ import edit from "../assets/edit.svg";
 import { Flex, Space } from "../components/common";
 import AuthButton from "../components/AuthButton";
 import DiaryItem from "../components/diaryList/DiaryItem";
-import Date from "../components/diaryList/Date";
+import DateComp from "../components/diaryList/Date";
 import service from "../services";
 import { useEffect } from "react";
 import useDiaryStore, { DiaryT } from "../stores/DiaryStore";
@@ -13,11 +14,24 @@ import useDiaryStore, { DiaryT } from "../stores/DiaryStore";
 const DiaryList = () => {
   const navigate = useNavigate();
   const { diary } = service;
-  const { diaries, setDiaries, setSelectedDiary } = useDiaryStore();
+  const { month, setDiaries, setSelectedDiary } = useDiaryStore();
+
+  const [filteredDiaries, setFilteredDiaries] = useState<DiaryT[]>([]);
 
   const initDiaries = async () => {
-    const diaries = await diary.getDiaries();
+    const diaries: DiaryT[] = await diary.getDiaries();
     setDiaries(diaries);
+
+    const filtered = diaries
+      .filter(
+        (diary: DiaryT) => new Date(diary.created_at).getMonth() + 1 === month
+      )
+      .sort(
+        (a: DiaryT, b: DiaryT) =>
+          +new Date(a.created_at) - +new Date(b.created_at)
+      );
+    console.log("filtered", filtered);
+    setFilteredDiaries(filtered);
   };
 
   const goToChat = () => {
@@ -31,7 +45,7 @@ const DiaryList = () => {
 
   useEffect(() => {
     initDiaries();
-  }, []);
+  }, [month]);
 
   return (
     <Flex d="column" style={{ padding: "10px 30px" }}>
@@ -40,7 +54,7 @@ const DiaryList = () => {
       </Flex>
       <Space h="15px" />
       <Flex j="space-between" style={{ position: "relative" }}>
-        <Date />
+        <DateComp />
         <img
           alt="edit"
           src={edit}
@@ -50,7 +64,7 @@ const DiaryList = () => {
       </Flex>
       <Space h="30px" />
       <ListWrapper j="center">
-        {diaries.map((item, idx) => {
+        {filteredDiaries.map((item, idx) => {
           return (
             <DiaryItem
               item={item}
@@ -59,12 +73,13 @@ const DiaryList = () => {
             />
           );
         })}
-        {diaries.length % 2 === 1 && (
+        {filteredDiaries.length % 2 === 1 && (
           <div
             style={{
               width: 154,
               height: 134,
-              borderTop: diaries.length === 1 ? "" : `1px dashed ${color.dash}`,
+              borderTop:
+                filteredDiaries.length === 1 ? "" : `1px dashed ${color.dash}`,
             }}
           ></div>
         )}

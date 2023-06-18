@@ -13,14 +13,19 @@ export type DiaryT = {
 type State = {
   diaries: DiaryT[];
   selectedDiary: DiaryT | null;
+  month: number;
+  year: number;
   setDiaries: (diaries: DiaryT[]) => void;
   setSelectedDiary: (diary: DiaryT) => void;
+  setMonth: (month: number) => void;
 };
 
 const useDiaryStore = create(
   devtools<State>((set) => ({
     diaries: [],
     selectedDiary: null,
+    month: 6,
+    year: 2023,
     setDiaries: (diaries: DiaryT[]) => {
       set((state: State) => ({
         ...state,
@@ -31,6 +36,12 @@ const useDiaryStore = create(
       set((state: State) => ({
         ...state,
         selectedDiary: diary,
+      }));
+    },
+    setMonth: (month: number) => {
+      set((state: State) => ({
+        ...state,
+        month,
       }));
     },
   }))
